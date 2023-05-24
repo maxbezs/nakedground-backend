@@ -18,13 +18,15 @@ const monmodel = mongoose.model("NGCUSTOMERS", sch);
 
 app.post("/api/trip-list", async (req, res) => {
     const { email } = req.body;
+    const { name } = req.body;
     try {
         const document = await monmodel.findOne({email: email});
         if (document) {
           res.status(200).json({ success: true, message: "Email Exist" });
         } else {
           const data = new monmodel({
-            email: email
+            email: email,
+            name: name
           });
           const val = await data.save();
       
@@ -34,7 +36,7 @@ app.post("/api/trip-list", async (req, res) => {
           const subject = 'NAKED GROUND Subscription';
           const message = `
             <h1>You Subscribed!</h1>
-            <p>Congratulations, ${email} is subscribed!</p>
+            <p>Congratulations  ${name}, ${email} is subscribed!</p>
             <h2>NAKED GROUND</h2>
           `;
       
