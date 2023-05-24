@@ -11,7 +11,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 const sch={
-    email: String
+    email: String,
+    name: String
 }
 
 const monmodel = mongoose.model("NGCUSTOMERS", sch);
